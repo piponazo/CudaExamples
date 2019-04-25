@@ -38,8 +38,9 @@ void verification(const float *h_A, const float *h_B, const float *h_C, const in
 
 int main(int argc, char **argv)
 {
+    gflags::SetUsageMessage("appName -N=numberOfElements");
     gflags::ParseCommandLineFlags(&argc, &argv, true);
-    std::cout << "vector addition [host version]" << std::endl;
+    std::cout << "vector addition [host version]. " << FLAGS_N << " elements." << std::endl;
 
     std::vector<float> h_A(FLAGS_N), h_B(FLAGS_N), h_C(FLAGS_N);
 

@@ -33,19 +33,19 @@ void inputInitialization(float *h_A, float *h_B, const int n)
 
 void vecAdd(const float *h_A, const float *h_B, const int n, float *h_C)
 {
-    const int size = n * sizeof(float);
+    const int sizeInBytes = n * sizeof(float);
     float *d_A, *d_B, *d_C;
 
-    cudaMalloc(&d_A, size);
-    cudaMalloc(&d_B, size);
-    cudaMalloc(&d_C, size);
+    cudaMalloc(&d_A, sizeInBytes);
+    cudaMalloc(&d_B, sizeInBytes);
+    cudaMalloc(&d_C, sizeInBytes);
 
-    cudaMemcpy(d_A, h_A, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_B, h_B, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_A, h_A, sizeInBytes, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_B, h_B, sizeInBytes, cudaMemcpyHostToDevice);
 
     vecAddKernel<<<std::ceil(n / 256.0), 256>>>(d_A, d_B, n, d_C);
 
-    cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
+    cudaMemcpy(h_C, d_C, sizeInBytes, cudaMemcpyDeviceToHost);
     cudaFree(d_A);
     cudaFree(d_B);
     cudaFree(d_C);
@@ -63,6 +63,8 @@ void verificationHost(const float *h_A, const float *h_B, const float *h_C, cons
 
 int main(int argc, char **argv)
 {
+    gflags::SetUsageMessage("appName -N=numberOfElements");
+    gflags::ParseCommandLineFlags(&argc, &argv, true);
     auto start = std::chrono::steady_clock::now();
 
     std::vector<float> h_A(FLAGS_N), h_B(FLAGS_N), h_C(FLAGS_N);
