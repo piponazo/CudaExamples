@@ -33,7 +33,7 @@ void inputInitialization(float *h_A, float *h_B, const int n)
 
 void vecAdd(const float *h_A, const float *h_B, const int n, float *h_C)
 {
-    const int sizeInBytes = n * sizeof(float);
+    const size_t sizeInBytes = n * sizeof(float);
     float *d_A, *d_B, *d_C;
 
     cudaMalloc(&d_A, sizeInBytes);

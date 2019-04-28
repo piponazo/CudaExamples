@@ -25,6 +25,7 @@ set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
 include(cmake_stuff/findDependencies.cmake      REQUIRED)
 include(cmake_stuff/compileroptions.cmake       REQUIRED)
 
+add_subdirectory(lib)
 add_subdirectory(apps)
 
 #include(cmake_stuff/packageGenerator.cmake      REQUIRED)

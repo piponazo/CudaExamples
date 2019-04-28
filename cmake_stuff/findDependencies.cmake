@@ -9,3 +9,4 @@ endif()
 
 set (GFLAGS_USE_TARGET_NAMESPACE ON)
 find_package(gflags 2.2.2 EXACT REQUIRED)
+find_package(JPEG REQUIRED)
