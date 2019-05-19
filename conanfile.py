@@ -8,6 +8,7 @@ class MyConan(ConanFile):
     def requirements(self):
         self.requires('gflags/2.2.2@bincrafters/stable')
         self.requires('libjpeg/9c@bincrafters/stable')
+        self.requires('libtiff/4.0.9@bincrafters/stable')
 
     def configure(self):
         self.options['gflags'].shared = True
